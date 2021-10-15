@@ -5,6 +5,11 @@ import {
 } from "@heroicons/react/outline";
 import LottieAnimation from "../components/LottieAnimation";
 import Gift from "../animation/gift.json";
+import Buttons from "../components/buttons";
+import InvestedCurrency from "../components/investedCurrency";
+import { netWorth } from "../constants/indexConstants";
+import Choices from "../components/choices";
+import Refer from "../components/refer";
 
 export default function Home() {
   return (
@@ -20,20 +25,12 @@ export default function Home() {
           <p className="text-xs">Total Worth</p>
         </div>
         <div className="flex items-center gap-1 py-1">
-          <p className="text-2xl font-semibold">₹205</p>
+          <p className="text-2xl font-semibold">{netWorth}</p>
           <QuestionMarkCircleIcon className="w-5" />
         </div>
       </div>
       {/* buttons */}
-      <div className="flex justify-evenly py-2 bg-gray-100">
-        <button className="p-1 px-5 rounded-md flex items-center gap-2 bg-blue-800 text-white">
-          <CurrencyDollarIcon className="w-5 bg-yellow-600 rounded-full" />
-          <p>BUY BITCOIN</p>
-        </button>
-        <button className="p-1 border-2 border-blue-800 px-5 rounded-md text-blue-800">
-          DEPOSITE INR
-        </button>
-      </div>
+      <Buttons />
       {/* banner */}
       {/* watchlist */}
       <div className="flex justify-between py-1 px-2 bg-gray-100">
@@ -41,19 +38,7 @@ export default function Home() {
         <p className="text-sm text-blue-800">Add More</p>
       </div>
       {/* invested currencies */}
-      <div className="flex justify-between py-2 px-2 bg-gray-100">
-        <div className="flex items-center gap-2">
-          <CurrencyDollarIcon className="w-7 bg-yellow-600 rounded-full text-white" />
-          <div>
-            <p>Bitcoin</p>
-            <p>BTC</p>
-          </div>
-        </div>
-        <div>
-          <p>₹44,55,647.48</p>
-          <p className="text-green-400 text-right">10%</p>
-        </div>
-      </div>
+      <InvestedCurrency />
       {/* popular currencies */}
       <div className="bg-gray-100">
         <div className="flex justify-between py-2 px-2">
@@ -62,48 +47,9 @@ export default function Home() {
         </div>
       </div>
       {/* choices */}
-      <div className="flex gap-2 overflow-scroll justify-center bg-gray-100">
-        <div className="w-40 h-40 border-2 border-gray-200">
-          <p className="text-blue-800 bg-blue-300 w-20 m-1 text-xs whitespace-nowrap">
-            Most Watched
-          </p>
-          <div className="flex flex-col items-center mt-5">
-            <CurrencyDollarIcon className="w-7 bg-yellow-600 rounded-full text-white" />
-            <p className="mt-2">BTC</p>
-            <p>₹44,55,647.48</p>
-            <p className="text-green-400">10%</p>
-          </div>
-        </div>
-        <div className="w-40 h-40 border-2 border-gray-200">
-          <p className="text-blue-800 bg-blue-300 w-20 m-1 text-xs whitespace-nowrap">
-            Most Bought
-          </p>
-          <div className="flex flex-col items-center mt-5">
-            <CurrencyDollarIcon className="w-7 bg-yellow-600 rounded-full text-white" />
-            <p className="mt-2">BTC</p>
-            <p>₹44,55,647.48</p>
-            <p className="text-green-400">10%</p>
-          </div>
-        </div>
-      </div>
+      <Choices />
       {/* refer */}
-      <div>
-        <div>
-          <a className="flex items-center justify-start px-4 gap-4 bg-gray-100 py-2 ">
-            <div>
-              <p className="text-sm text-gray-500 font-bold">
-                Refer and Earn FREE BITCOINS
-              </p>
-              <p className="text-xs text-gray-500">
-                Earn ₹50 worth of free BTC by inviting your friends to join
-              </p>
-            </div>
-            <div>
-              <LottieAnimation lotti={Gift} height={80} width={80} />
-            </div>
-          </a>
-        </div>
-      </div>
+      <Refer/>
     </div>
   );
 }
