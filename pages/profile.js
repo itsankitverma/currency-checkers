@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable @next/next/link-passhref */
 import { UserIcon } from "@heroicons/react/solid";
 import React from "react";
@@ -10,59 +11,80 @@ import {
   InformationCircleIcon,
   StarIcon,
   CurrencyDollarIcon,
+  LogoutIcon,
 } from "@heroicons/react/solid";
 import Link from "next/link";
 import Head from "next/head";
+import { useFirebase } from "../lib/firebase";
+import { useUserData } from "../lib/firebase/useUserData";
 
 function Profile() {
+  const { handleSignOut } = useFirebase();
+  const { user } = useUserData();
+  const profileImgUrl = user?.photoURL;
   const profileData = [
     {
       icon: <UserCircleIcon className="font-bold h-8" />,
       title: "User Verification",
       desc: "Complete Your KYC to but sell and withdraw",
       page: "/kyc",
+      func: "",
     },
     {
       icon: <LibraryIcon className="font-bold h-8" />,
       title: "Bank Details",
       desc: "This account is used to facilitate all your deposits and withdrawls",
       page: "/kyc",
+      func: "",
     },
     {
       icon: <RefreshIcon className="font-bold h-8" />,
       title: "History",
       desc: "All your transactions on AN-SWITCH",
       page: "/kyc",
+      func: "",
     },
     {
       icon: <ShoppingBagIcon className="font-bold h-8" />,
       title: "Redeem Gift Voucher",
       desc: "Got a voucher redeem it here",
       page: "/kyc",
+      func: "",
     },
     {
       icon: <FingerPrintIcon className="font-bold h-8" />,
       title: "Biometric Login",
       desc: "",
       page: "/kyc",
+      func: "",
     },
     {
       icon: <InformationCircleIcon className="font-bold h-8" />,
       title: "Help & Support",
       desc: "Create a ticket and we will contact you",
       page: "/kyc",
+      func: "",
     },
     {
       icon: <StarIcon className="font-bold h-8" />,
       title: "Rate Us",
       desc: "Tell Us what you think",
       page: "/kyc",
+      func: "",
     },
     {
       icon: <CurrencyDollarIcon className="font-bold h-8" />,
       title: "About AN-SWITCH",
       desc: "v0.0.1",
       page: "/kyc",
+      func: "",
+    },
+    {
+      icon: <LogoutIcon className="font-bold h-8" />,
+      title: "Logout",
+      desc: "",
+      page: "/login",
+      func: handleSignOut,
     },
   ];
   return (
@@ -74,22 +96,30 @@ function Profile() {
       </Head>
       <div className="flex items-center justify-center flex-col pt-5">
         <div>
-          <UserIcon className="h-14 border-2 bg-blue-200 rounded-full  text-blue-500" />
+          <img
+            className="h-20 border-2 bg-blue-200 rounded-full  text-blue-500 pb-2"
+            src={profileImgUrl}
+            alt=""
+          />
+          {/* <UserIcon className="h-14 border-2 bg-blue-200 rounded-full  text-blue-500" /> */}
         </div>
         <p className="text-sm text-gray-500">KYC Verified </p>
       </div>
       <div className="flex items-center justify-center flex-col pt-3">
-        <p className="font-bold text-xl ">Ankit Verma</p>
+        <p className="font-bold text-xl ">{user?.displayName}</p>
         <p className="text-gray-500 text-sm pt-1">9999999999</p>
       </div>
       {/* details */}
-      <div className="py-3 flex  flex-col gap-2">
+      <div className="py-3 flex  flex-col gap-2 pb-20">
         {profileData.map((val, id) => {
           return (
             <Link href={`${val.page}`} key={id}>
-              <a className="flex items-center justify-start px-4 gap-4 bg-gray-100 py-2 ">
+              <a
+                className="flex items-center justify-start px-4 gap-4 bg-gray-100 py-2 "
+                onClick={val.func}
+              >
                 {val.icon}
-                <div>
+                <div className="">
                   <p className="text-base text-gray-500">{val.title}</p>
                   <p className="text-sm text-gray-500">{val.desc}</p>
                 </div>
