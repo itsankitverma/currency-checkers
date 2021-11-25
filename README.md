@@ -4,6 +4,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 First, run the development server:
 
+Also, Check the website in mobile view. Since this is a mobile only website at the moment.
+
 ```bash
 npm run dev
 # or
